@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://archives.bulbagarden.net/media/upload/3/3a/0039Jigglypuff.png" type="image/x-icon">
+    <title>Music Player: Pokemon</title>
+    <style>
+        body {
+            background-color: rgb(161, 161, 161);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="ready == false">
+            Please load Gamehook's mapper and possibly refresh the page.
+        </div>
+        <div v-else>
+            Gamehook connected successfully.</div>
+            <br><br><br>
+            <p>
+                Please note that modern web browsers block automatic media playback by default. You will need to press the play button for the music to start playing. <br>
+                If you don't want to do this, you will need to copy this file's url, go into your browser's settings, and allow media playback
+                for this particular file for the music to work.  
+                <br>
+                Please download the files from the included shortcut and drop them in music/crystal/ or music/yellow/. 
+                <br>You can edit the file names in soundData.js to replace the default songs with your own preferred files if you want.
+            </p>
+            <h3> Music Selection Type:</h3>
+            <label for="selectionType">Music Selection Type: </label>
+                <select id="selectionType" v-model="selectionType" @change="saveToLocalStorage('selectionType')">
+                    <option value="Accurate">Accurate</option>
+                    <option value="Streaming">Streaming</option>
+                </select>
+            <br>
+            <p>Minimum song length for streaming mode: 
+            <input v-model="minLength" title="Minimum song length for streaming mode: " @change="saveToLocalStorage('minLength')">
+            </p>
+
+            <h1>Volume controls</h1>
+            <div class="slidecontainer">
+                <p>Music: <button @click="toggleAudio"> Play/Pause </button></p>
+                <input type="range" min="0" max="100" v-model="musicVolume" class="slider" title="Music Volume" @change="saveToLocalStorage('musicVolume')">
+                <p>Volume: {{ musicVolume }} </p>
+                <br>
+                <p>Overworld Sound Effects:</p>
+                <input type="range" min="0" max="100" v-model="worldSfxVolume" class="slider" title="Overworld Sound Effect Volume" @change="saveToLocalStorage('worldSfxVolume')">
+                <p>Volume: {{ worldSfxVolume }}</p>
+                <br>
+                <p>Battle Sound Effects:</p>
+                <input type="range" min="0" max="100" v-model="battleSfxVolume" class="slider" title="Battle Sound Effect Volume" @change="saveToLocalStorage('battleSfxVolume')">
+                <p>Volume: {{ battleSfxVolume }}</p>
+                <br>
+                <p>Event Sound Effects:</p>
+                <input type="range" min="0" max="100" v-model="eventSfxVolume" class="slider" title="Event Sound Effect Volume" @change="saveToLocalStorage('eventSfxVolume')">
+                <p>Volume: {{ eventSfxVolume }}<p>
+                <div>
+                    <h1>Optional choices</h1>
+                    <label for="wildCheck">Wild Pokemon Battles: </label>
+                    <input type="checkbox" id="wildCheck" v-model="wildCheck" title="Toggle Music for Wild Pokemon Battles" @change="saveToLocalStorage('wildCheck')"> <br>
+                    <label for="trainerCheck">Trainer Battles: </label>
+                    <input type="checkbox" id="trainerCheck" v-model="trainerCheck" title="Toggle Music for Trainer Battles" checked @change="saveToLocalStorage('trainerCheck')"> <br>
+                    <label for="trainerCheck">Custom Trainer Songs: </label>
+                    <input type="checkbox" id="customTrainerCheck" v-model="customTrainerCheck" title="Toggle  Custom Music for Certain Trainer Battles" checked @change="saveToLocalStorage('customTrainerCheck')"> <br>
+                    <label for="clickCheck">Clicks: </label>
+                    <input type="checkbox" id="clickCheck" v-model="clickCheck" title="Toggle Clicks when pressing A" checked @change="saveToLocalStorage('clickCheck')"> <br>
+                    <label for="doorCheck">Doors: </label>
+                    <input type="checkbox" id="doorCheck" v-model="doorCheck" title="Toggle Entry/Exit Noises for Buildings and Caves" checked @change="saveToLocalStorage('doorCheck')"> <br> 
+                    <label for="bonkCheck">Bonks: </label>
+                    <input type="checkbox" id="bonkCheck" v-model="bonkCheck" title="Toggle Bonk Noise When Running Into Walls" @change="saveToLocalStorage('bonkCheck')"> <br>
+                    <label for="boulderCheck">Boulder pushing: </label>
+                    <select id="boulderCheck" v-model="boulderCheck" @change="saveToLocalStorage('boulderCheck')">
+                        <option value="Full">Full</option>
+                        <option value="Short">Short</option>
+                        <option value="Off">Off</option>
+                    </select>
+                    <br>
+                    <label for="poisonCheck">Overworld Poison: </label>
+                    <input type="checkbox" id="poisonCheck" v-model="poisonCheck" title="Toggle Poison damage noise in the overworld" @change="saveToLocalStorage('poisonCheck')"> <br>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+        <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
+        <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+        <script src="musicData.js"></script>
+        <script src="soundData.js"></script>
+        <script src="customTrainers.js"></script>
+        <script src="music.js"></script>
+</body>
