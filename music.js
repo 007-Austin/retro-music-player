@@ -24,6 +24,7 @@ const app = Vue.createApp({
             boulderCheck: "Full",
             selectionType: "Accurate",
             minLength: 30,
+            skipLength: 30,
 
         }
     },
@@ -100,14 +101,44 @@ const app = Vue.createApp({
                 ) {
                     if(this.selectionType=="Streaming")
                     {
-                        console.log("1")
-                        if(this.curSong.currentTime>0 && this.curSong.currentTime < this.minLength){
-                            console.log("2")
-                            if(musicData[game].music[i].battle!="champion") {
-                                console.log("3")
+                        // if(this.curSong.currentTime>0 && this.curSong.currentTime < this.minLength){
+                        //     let importantTracks = ["champion"];
+                        //     if(musicData[game].music[i].battle!="champion") {
+                        //         return;
+                        //     }
+                        // }
+                        
+                        if(this.curSong.currentTime>0 && this.curSong.currentTime < this.skipLength){
+                            let importantTracks = [
+                                //gen 1 kanto
+                                "Hall Of Fame","Jigglypuff's song","SS Anne","Rival","Hurry Along",
+                                "Viridian Forest","Cave Mt Moon Rock Tunnel","Gym Leader Battle","Pokemon Mansion",
+                                "Silph Co","Champion Battle",
+                                //gen 2
+
+                                "nationalPark","ruinsOfAlph","gymLeaderBattle","champion","rivalBattle","burnedTower","mtSilver",
+                                "dragonsDen","victoryRoad","kimonoStudio","clair","buena","eusine","legendaryPokemon","cave",
+                                //gen 3 hoenn
+                                //need to organize these better but whatever
+                                "MUS_PETALBURG_WOODS","MUS_LILYCOVE_MUSEUM","MUS_OCEANIC_MUSEUM",  "MUS_ABANDONED_SHIP",
+                                "MUS_AWAKEN_LEGEND","MUS_VICTORY_ROAD","MUS_ABNORMAL_WEATHER", "93. The Trick House",
+                                "MUS_VS_RAYQUAZA", "MUS_VS_GYM_LEADER", "MUS_VS_CHAMPION", "MUS_VS_REGI", "MUS_VS_KYOGRE_GROUDON",
+                                "MUS_VS_RIVAL","MUS_VS_ELITE_FOUR","MUS_VS_AQUA_MAGMA_LEADER",
+                            ];
+                            if(!importantTracks.includes(musicData[game].music[i].song)) {
                                 return;
                             }
                         }
+                        let minimumSkipLength = musicData[game].music[i].skippableAfter;
+                            if(!minimumSkipLength || minimumSkipLength > this.minLength) { 
+                                this.skipLength = this.minLength;
+                                console.log("regular skip length;")
+                            }
+                            else {
+                                this.skipLength = minimumSkipLength;
+                                console.log("faster skip")
+                            }
+                        //if trainer id = start of nugget bridge 
                     }
                     //skip unchecked options
                     if(musicData[game].music[i].battle=="wild" && !this.wildCheck) {

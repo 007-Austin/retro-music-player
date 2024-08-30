@@ -436,21 +436,24 @@ const musicData = {
                 "file": "music/emerald/10. Victory! (Wild Pokémon).flac",
                 "musicID": 353,
                 "battle" : "wild",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_VICTORY_GYM_LEADER",
                 "file": "music/emerald/51. Victory! (Gym Leader).flac",
                 "musicID": 354,
                 "battle" : "gymLeader",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_VICTORY_LEAGUE",
                 "file": "music/emerald/102. Victory! (Steven).flac",
                 "musicID": 355,
                 "battle" : "champion",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_ROUTE101",
@@ -692,7 +695,8 @@ const musicData = {
                 "file": "music/emerald/18. Victory! (Trainer Battle).flac",
                 "musicID": 412,
                 "battle" : "trainer",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_TITLE",
@@ -760,7 +764,8 @@ const musicData = {
                 "file": "music/emerald/26. Victory! (Team Aqua ∕ Team Magma).flac",
                 "musicID": 424,
                 "battle" : "rocket",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_CABLE_CAR",
@@ -1372,7 +1377,7 @@ const musicData = {
                 "file": "music/crystal/06.mp3",
                 "channel1MusicID": 1536,
                 "battle" : "gymLeader",
-                "stage" : "battle"
+                "stage" : "battle",
             },
             {
                 "song": "trainerBattleKanto",
@@ -1478,7 +1483,8 @@ const musicData = {
                 "file": "music/crystal/23.mp3",
                 "channel1MusicID": 5888,
                 "battle" : "trainer",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
 
             },
             {
@@ -1486,7 +1492,8 @@ const musicData = {
                 "file": "music/crystal/24.mp3",
                 "channel1MusicID": 6144,
                 "battle" : "wild",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
 
             },
             {
@@ -1494,7 +1501,8 @@ const musicData = {
                 "file": "music/crystal/25.mp3",
                 "channel1MusicID": 6400,
                 "battle" : "gymLeader",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5,
 
             },
             {
@@ -1548,7 +1556,8 @@ const musicData = {
             {
                 "song": "nationalPark",
                 "file": "music/crystal/35.mp3",
-                "channel1MusicID": 8960
+                "channel1MusicID": 8960,
+                "priority" : "high",
             },
             {
                 "song": "credits",
@@ -1570,7 +1579,8 @@ const musicData = {
                 "file": "music/crystal/39.mp3",
                 "channel1MusicID": 9984,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "priority" : "high",
 
             },
             {
@@ -1612,21 +1622,24 @@ const musicData = {
                 "file": "music/crystal/46.mp3",
                 "channel1MusicID": 11776,
                 "battle" : "gymLeader",
-                "stage" : "battle"
+                "stage" : "battle",
+                "priority" : "high",
             },
             {
                 "song": "champion",
                 "file": "music/crystal/47.mp3",
                 "channel1MusicID": 12032,
                 "battle" : "champion",
-                "stage" : "battle"
+                "stage" : "battle",
+                "priority" : "high",
             },
             {
                 "song": "rivalBattle",
                 "file": "music/crystal/48.mp3",
                 "channel1MusicID": 12288,
                 "battle" : "rival",
-                "stage" : "battle"
+                "stage" : "battle",
+                "priority" : "high",
             },
             {
                 "song": "rocketBattle",
@@ -1643,7 +1656,8 @@ const musicData = {
             {
                 "song": "cave",
                 "file": "music/crystal/51.mp3",
-                "channel1MusicID": 13056
+                "channel1MusicID": 13056,
+                "priority" : "high",
             },
             {
                 "song": "route29",
@@ -1658,7 +1672,8 @@ const musicData = {
             {
                 "song": "fastShipSsAqua",
                 "file": "music/crystal/54.mp3",
-                "channel1MusicID": 13824
+                "channel1MusicID": 13824,
+                "priority" : "high",
             },
             {
                 "song": "trainerBoyAggro",
@@ -1725,17 +1740,20 @@ const musicData = {
             {
                 "song": "tower",
                 "file": "music/crystal/66.mp3",
-                "channel1MusicID": 16896
+                "channel1MusicID": 16896,
+                "priority" : "high",
             },
             {
                 "song": "burnedTower",
                 "file": "music/crystal/67.mp3",
-                "channel1MusicID": 17152
+                "channel1MusicID": 17152,
+                "priority" : "high",
             },
             {
                 "song": "mtSilver",
                 "file": "music/crystal/68.mp3",
-                "channel1MusicID": 17408
+                "channel1MusicID": 17408,
+                "priority" : "high",
             },
             {
                 "song": "lakeOfRage",
@@ -1745,7 +1763,7 @@ const musicData = {
             {
                 "song": "pkmnLeague",
                 "file": "music/crystal/70.mp3",
-                "channel1MusicID": 17920
+                "channel1MusicID": 17920,
             },
             {
                 "song": "route38",
@@ -1760,7 +1778,8 @@ const musicData = {
             {
                 "song": "dragonsDen",
                 "file": "music/crystal/73.mp3",
-                "channel1MusicID": 18688
+                "channel1MusicID": 18688,
+                "priority" : "high",
             },
             {
                 "song": "wildBattleNight",
@@ -1790,7 +1809,8 @@ const musicData = {
             {
                 "song": "victoryRoad",
                 "file": "music/crystal/79.mp3",
-                "channel1MusicID": 20224
+                "channel1MusicID": 20224,
+                "priority" : "high",
             },
             {
                 "song": "pokemonLullaby",
@@ -1872,7 +1892,8 @@ const musicData = {
                 "file": "music/crystal/100 Battle vs Legendary Pokemon.mp3",
                 "channel1MusicID": 25600,
                 "battle" : "legendary",
-                "stage" : "battle"
+                "stage" : "battle",
+                "priority" : "high",
             },
             {
                 "song": "battleTowerInside",
@@ -2041,6 +2062,7 @@ const musicData = {
                 "song": "Rival",
                 "file": "music/yellow/15 Rival Appears.mp3",
                 "channel1": 222,
+                "skippableAfter" : 15,
             },
             {
                 "song": "Team Rocket Hideout",
@@ -2158,7 +2180,7 @@ const musicData = {
                 "overworldMap" : ["Route 3", "Route 4", "Route 5", "Route 6", "Route 7", "Route 8", "Route 9", "Route 10", "Route 16", "Route 17", "Route 18", "Route 22"]
             },
             {
-                "song": " Champion Battle",
+                "song": "Champion Battle",
                 "file": "music/yellow/26 Last Battle (VS Rival).mp3",
                 "channel1": 243,
                 "audioBank" : 8,
@@ -2179,7 +2201,8 @@ const musicData = {
                 "channel1": 246,
                 "audioBank" : 8,
                 "battle" : "trainer",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5
             },
             {
                 "song": "Route 11, 12, 13, 14, 15",
@@ -2203,6 +2226,7 @@ const musicData = {
                 "audioBank" : 8,
                 "battle" : "wild",
                 "stage" : "victory",
+                "skippableAfter" : 5
             },
             {
                 "song": "Indigo Plateau",
@@ -2225,7 +2249,8 @@ const musicData = {
                 "channel1": 252,
                 "audioBank" : 8,
                 "battle" : "gymLeader",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 10,
             },
 
         ] 
@@ -2370,6 +2395,7 @@ const musicData = {
                 "file": "music/yellow/15 Rival Appears.mp3",
                 "channel1": 222,
                 "audioBank" : 2,
+                "skippableAfter" : 15,
             },
             {
                 "song": "Team Rocket Hideout",
@@ -2489,7 +2515,8 @@ const musicData = {
                 "channel1": 246,
                 "audioBank" : 8,
                 "battle" : "trainer",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5
             },
             {
                 "song": "Route 11, 12, 13, 14, 15",
@@ -2512,6 +2539,7 @@ const musicData = {
                 "audioBank" : 8,
                 "battle" : "wild",
                 "stage" : "victory",
+                "skippableAfter" : 5,
             },
             {
                 "song": "Indigo Plateau",
@@ -2533,7 +2561,8 @@ const musicData = {
                 "channel1": 252,
                 "audioBank" : 8,
                 "battle" : "gymLeader",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 10,
             },
 
         ] 
