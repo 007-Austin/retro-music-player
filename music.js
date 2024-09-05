@@ -25,7 +25,28 @@ const app = Vue.createApp({
             selectionType: "Accurate",
             minLength: 30,
             skipLength: 30,
-
+            musicData: musicData,
+            showTableSongs: false,
+            showTableTrainers: false,
+            trainerData: [
+                {
+                "class": "PKMN Trainer",
+                "name": "Red",
+                "customTheme": "gymLeaderBattleKanto",
+                "lockUntilVictory": false,
+                "lockUntilTime": 600
+                },
+                {
+                "class": "Gym Leader",
+                "name": "Blue",
+                "customTheme": "trainerBattleKanto",
+                "lockUntilVictory": false,
+                "lockUntilTime": 300
+                }
+            ],
+            classOptions: ["PKMN Trainer", "Gym Leader", "Elite Four"],
+            nameOptions: ["Red", "Blue", "Misty"],
+            themeOptions: ["Default", "trainerBattleKanto", "gymLeaderBattleKanto"]
         }
     },
     methods: {
@@ -475,6 +496,8 @@ const app = Vue.createApp({
             catch{
                 console.log("error playing");
             }
+
+            
         },
 
         playSound() {
@@ -589,8 +612,25 @@ const app = Vue.createApp({
             this.loadFromLocalStorage('selectionType');
             this.loadFromLocalStorage('minLength');
             
-
         },
+        openFileUpload(index) {
+            this.$refs.fileInput[index].click();
+          },
+          handleFileSelection(event, index) {
+            const file = event.target.files[0];
+            if (file) {
+              const fullPath = file.webkitRelativePath || file.name;
+              this.musicData[this.game].music[index].file = fullPath;
+            }
+          },
+
+          //menu toggles
+          toggleTableSongs() {
+            this.showTableSongs = !this.showTableSongs;
+          },
+          toggleTableTrainers() {
+            this.showTableTrainers = !this.showTableTrainers;
+          },
         
     },
 
@@ -610,6 +650,9 @@ const app = Vue.createApp({
         },
         eventSfxOutput() {
             return this.eventSfxVolume * this.sfxVolumeFactor / 100;
+        },
+        fileOptions() {
+            return this.musicData[this.game].music.map(track => track.file);
         },
     },
     mounted: async function () {

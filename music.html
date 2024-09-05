@@ -9,7 +9,36 @@
         body {
             background-color: rgb(161, 161, 161);
         }
+        
     </style>
+    <style>
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        th {
+          background-color: #b8ffb8;
+          text-align: left;
+        }
+        tr:nth-child(even) {
+          background-color: #55C055;
+        }
+        tr:nth-child(odd) {
+          background-color: #33A033;
+        }
+        tr:hover {
+          background-color: #c2e29e;
+        }
+        .grid-background {
+          background-image: linear-gradient(to right, #e0e0e0 1px, transparent 1px), 
+                            linear-gradient(to bottom, #e0e0e0 1px, transparent 1px);
+          background-size: 20px 20px;
+        }
+      </style>
 </head>
 <body>
     <div id="app">
@@ -79,7 +108,80 @@
                     <label for="poisonCheck">Overworld Poison: </label>
                     <input type="checkbox" id="poisonCheck" v-model="poisonCheck" title="Toggle Poison damage noise in the overworld" @change="saveToLocalStorage('poisonCheck')"> <br>
                 </div>
-            </div>
+            </div><br>
+            <!-- Table for songs -->
+            <button @click="toggleTableSongs">{{ showTableSongs ? 'Hide' : 'Show' }} Song Settings</button>
+            <div id="songsTable" class="grid-background" v-if="showTableSongs">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Song</th>
+                      <th>File</th>
+                      <th>Enabled</th>
+                      <th>Priority</th>
+                      <th>Min Length</th>
+                      <th>Cooldown</th>
+                      <th>Followed By</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(track, index) in musicData[game]?.music" :key="track.musicID">
+                      <td>{{ track.song }}</td>
+                      <td>
+                        <select v-model="track.file">
+                          <option v-for="option in fileOptions" :value="option">{{ option }}</option>
+                        </select>
+                        <button @click="openFileUpload(index)">Upload</button>
+                        <input type="file" ref="fileInput" @change="handleFileSelection($event, index)" style="display: none;">
+                      </td>
+                      <td><input type="checkbox" v-model="track.enabled"></td>
+                      <td><input type="checkbox" v-model="track.priority"></td>
+                      <td><input type="number" v-model="track.minLength"></td>
+                      <td><input type="number" v-model="track.cooldown"></td>
+                      <td><input type="text" v-model="track.followedBy"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br><br>
+              <!-- Table for trainers -->
+            
+    <button @click="toggleTableTrainers">{{ showTableTrainers ? 'Hide' : 'Show' }} Trainer Settings</button>
+    <div id="trainersTable" class="grid-background" v-if="showTableTrainers">
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Name</th>
+            <th>Custom Theme</th>
+            <th>Lock Until Victory</th>
+            <th>Lock Until Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(trainer, index) in trainerData" :key="index">
+            <td>
+              <select v-model="trainer.class">
+                <option v-for="option in classOptions" :value="option">{{ option }}</option>
+              </select>
+            </td>
+            <td>
+              <select v-model="trainer.name">
+                <option v-for="option in nameOptions" :value="option">{{ option }}</option>
+              </select>
+            </td>
+            <td>
+              <select v-model="trainer.customTheme">
+                <option v-for="option in themeOptions" :value="option">{{ option }}</option>
+              </select>
+            </td>
+            <td><input type="checkbox" v-model="trainer.lockUntilVictory"></td>
+            <td><input type="number" v-model="trainer.lockUntilTime"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
         </div>
         <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
         <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
