@@ -31,6 +31,7 @@ const musicData = {
         "ch2" : "",
         "bank" : "",
         "map" : "",
+        "initialSong" : "music/firered/03. Title Screen.flac",
         "music": [
             {
                 "song": "silent",
@@ -425,6 +426,7 @@ const musicData = {
         "ch2" : "musicID",
         "bank" : "musicID",
         "map" : "musicID",
+        "initialSong" : "music/emerald/03. Title Screen꞉ Main Theme.flac",
         "music": [
             {
                 "song": "silent",
@@ -433,7 +435,7 @@ const musicData = {
             },
             {
                 "song": "MUS_VICTORY_WILD",
-                "file": "music/emerald/10. Victory! (Wild Pokémon).flac",
+                "file": "music/emerald/10. Victory! (Wild Pokemon).flac",
                 "musicID": 353,
                 "battle" : "wild",
                 "stage" : "victory",
@@ -482,7 +484,7 @@ const musicData = {
             },
             {
                 "song": "MUS_GYM",
-                "file": "music/emerald/49. Pokémon Gym.flac",
+                "file": "music/emerald/49. Pokemon Gym.flac",
                 "musicID": 364,
             },
             {
@@ -494,6 +496,7 @@ const musicData = {
                 "song": "MUS_PETALBURG_WOODS",
                 "file": "music/emerald/23. Petalburg Woods.flac",
                 "musicID": 366,
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_OBTAIN_BADGE",
@@ -507,7 +510,7 @@ const musicData = {
             },
             {
                 "song": "MUS_EVOLVED",
-                "file": "music/emerald67. Congratulations! Your Pokémon Evolved!.flac",
+                "file": "music/emerald/67. Congratulations! Your Pokemon Evolved!.flac",
                 "musicID": 371,
             },
             {
@@ -542,7 +545,7 @@ const musicData = {
             },
             {
                 "song": "MUS_ENCOUNTER_GIRL",
-                "file": "music/emerald/31. Trainers' Eyes Meet (Tuber♀).flac",
+                "file": "music/emerald/31. Trainers' Eyes Meet (TuberFE).flac",
                 "musicID": 379,
                 "battle" : "trainer",
                 "stage" : "aggro"
@@ -566,7 +569,7 @@ const musicData = {
             },
             {
                 "song": "MUS_BIRCH_LAB",
-                "file": "music/emerald/06. Birch Pokémon Lab.flac",
+                "file": "music/emerald/06. Birch Pokemon Lab.flac",
                 "musicID": 383,
             },
             {
@@ -576,7 +579,7 @@ const musicData = {
             },
             {
                 "song": "MUS_ENCOUNTER_SWIMMER",
-                "file": "music/emerald/84. Trainers' Eyes Meet (Swimmer♀).flac",
+                "file": "music/emerald/84. Trainers' Eyes Meet (SwimmerFE).flac",
                 "musicID": 385,
                 "battle" : "trainer",
                 "stage" : "aggro"
@@ -593,7 +596,7 @@ const musicData = {
             },
             {
                 "song": "MUS_AWAKEN_LEGEND",
-                "file": "music/emerald/77. The Super-Ancient Pokémon Awaken!.flac",
+                "file": "music/emerald/77. The Super-Ancient Pokemon Awaken!.flac",
                 "musicID": 388,
             },
             {
@@ -630,7 +633,7 @@ const musicData = {
             },
             {
                 "song": "MUS_POKE_CENTER",
-                "file": "music/emerald/13. Pokémon Center.flac",
+                "file": "music/emerald/13. Pokemon Center.flac",
                 "musicID": 400,
             },
             {
@@ -650,7 +653,7 @@ const musicData = {
             },
             {
                 "song": "MUS_POKE_MART",
-                "file": "music/emerald/68. Poké Mart.flac",
+                "file": "music/emerald/68. Poke Mart.flac",
                 "musicID": 404,
             },
             {
@@ -702,6 +705,7 @@ const musicData = {
                 "song": "MUS_TITLE",
                 "file": "music/emerald/03. Title Screen꞉ Main Theme.flac",
                 "musicID": 413,
+                "skippableAfter" : 10,
             },
             {
                 "song": "MUS_INTRO",
@@ -844,7 +848,7 @@ const musicData = {
             },
             {
                 "song": "MUS_CONTEST_WINNER",
-                "file": "music/emerald/88. Pokémon Contest!.flac",
+                "file": "music/emerald/88. Pokemon Contest!.flac",
                 "musicID": 440,
             },
             {
@@ -914,6 +918,7 @@ const musicData = {
                 "song": "MUS_ENCOUNTER_INTERVIEWER",
                 "file": "music/emerald/58. Interviewers.flac",
                 "musicID": 453,
+                "skippableAfter" : 5,
             },
             {
                 "song": "MUS_ENCOUNTER_CHAMPION",
@@ -997,7 +1002,7 @@ const musicData = {
             },
             {
                 "song": "MUS_VS_RAYQUAZA",
-                "file": "music/emerald/83. Battle! (Super-Ancient Pokémon).flac",
+                "file": "music/emerald/83. Battle! (Super-Ancient Pokemon).flac",
                 "musicID": 470,
                 "battle" : "legendary",
                 "stage" : "battle"
@@ -1021,7 +1026,7 @@ const musicData = {
             },
             {
                 "song": "MUS_VS_WILD",
-                "file": "music/emerald/09. Battle! (Wild Pokémon).flac",
+                "file": "music/emerald/09. Battle! (Wild Pokemon).flac",
                 "musicID": 474,
                 "battle" : "wild",
                 "stage" : "battle"
@@ -1063,7 +1068,7 @@ const musicData = {
             },
             {
                 "song": "MUS_VS_KYOGRE_GROUDON",
-                "file": "music/emerald/83. Battle! (Super-Ancient Pokémon).flac",
+                "file": "music/emerald/83. Battle! (Super-Ancient Pokemon).flac",
                 "musicID": 480,
                 "battle" : "legendary",
                 "stage" : "battle"
@@ -2057,6 +2062,7 @@ const musicData = {
                 "file": "music/yellow/01 Opening (part 1).mp3",
                 "channel1": 220,
                 "audioBank" : 31,
+                "disabled" : "stream",
             },
             {
                 "song": "Rival",
@@ -2284,6 +2290,7 @@ const musicData = {
                 "file": "music/yellow/06 Pokemon Gym.mp3",
                 "channel1": 192,
                 "audioBank" : 2,
+                
             },
             {
                 "song": "Viridian City",
@@ -2296,6 +2303,7 @@ const musicData = {
                 "file": "music/yellow/02 Opening (part 2).mp3",
                 "channel1": 195,
                 "audioBank" : 31,
+                
             },
             {
                 "song": "Cerulean City, Fuchsia City",
@@ -2389,6 +2397,8 @@ const musicData = {
                 "file": "music/rby/01 Opening Movie (Red, Green & Blue Version).flac",
                 "channel1": 220,
                 "audioBank" : 31,
+                "skippableAfter" : 5,
+                "disabled" : "stream",
             },
             {
                 "song": "Rival",
@@ -2494,12 +2504,13 @@ const musicData = {
                 "audioBank" : 2,
             },
             {
-                "song": " Champion Battle",
+                "song": "Champion Battle",
                 "file": "music/yellow/26 Last Battle (VS Rival).mp3",
                 "channel1": 243,
                 "audioBank" : 8,
                 "battle" : "champion",
-                "stage" : "battle"
+                "stage" : "battle",
+                "priority" : "high"
             },
             {
                 "song": "Rocket Aggro",

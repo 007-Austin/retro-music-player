@@ -55,7 +55,7 @@ const customTrainers = {
             {
                 /*format example*/
                 "opponentA": "RIVAL_STEVEN",
-                "file": "music/emerald/83. Battle! (Super-Ancient Pokémon).flac"
+                "file": "music/emerald/83. Battle! (Super-Ancient Pokemon).flac"
             },
         ],
         "types" : [
@@ -90,10 +90,18 @@ const customTrainers = {
         ],
         "trainers": [
             {
+                "name": "RED",
+                "file": "music/crystal/06.mp3" //kanto gym leader
+            },
+            {
+                "name": "BLUE",
+                "file": "music/crystal/07.mp3" //kanto gym leader
+            },
+            //{
                 //format example
                 //"name": "RED",
                 //"file": "music/heartgold/78 - Battle! (Champion).flac"
-            },
+            //},
             // {
             //     //format example
             //     "name": "WILL",
@@ -183,6 +191,10 @@ const customTrainers = {
             {
                 "name": "BRUNO",
                 "file": "music/yellow/16 Guide.mp3"
+            },
+            {
+                "name": "LORELEI",
+                "file": "music/yellow/26 Last Battle (VS Rival).mp3"
             },
             // {
             //     "name": "GIOVANNI",

@@ -62,8 +62,17 @@ const app = Vue.createApp({
             let ch1 = musicData[this.game].ch1;
             let map = musicData[this.game].map;
             let bank = musicData[this.game].bank;
+            //play music initially on page load
             setTimeout(() => { //delay so gamehook can update
                 this.pickSong(this.mapper.properties.audio[ch1], this.mapper.properties.audio[map]?.value, this.mapper.properties.audio[bank]?.value, this.mapper, this.game);
+                
+                //play the intro music on startup if no ID is detected
+                if(this.mapper.properties.audio[ch1] == 0)
+                {
+                    if(musicData[this.game]?.initialSong) {
+                        this.playSong(musicData[this.game].initialSong);
+                    }
+                }
             }, 2); //delay so gamehook can update
 
             // if(selectionType="Streaming") {
@@ -76,6 +85,8 @@ const app = Vue.createApp({
             //     })
             //     return;
             // }
+            
+            //This part will watch constantly for the music ID to change
             this.mapper.properties.audio[ch1].change(async (x) => {
                 channel1id = this.mapper.properties.audio[ch1];
 
@@ -137,11 +148,11 @@ const app = Vue.createApp({
                                 "Silph Co","Champion Battle",
                                 //gen 2
 
-                                "nationalPark","ruinsOfAlph","gymLeaderBattle","champion","rivalBattle","burnedTower","mtSilver",
-                                "dragonsDen","victoryRoad","kimonoStudio","clair","buena","eusine","legendaryPokemon","cave",
+                                "nationalPark","gymLeaderBattle","champion","rivalBattle","burnedTower",
+                                "dragonsDen","victoryRoad","kimonoStudio","clair","buena","eusine","legendaryPokemon",
                                 //gen 3 hoenn
                                 //need to organize these better but whatever
-                                "MUS_PETALBURG_WOODS","MUS_LILYCOVE_MUSEUM","MUS_OCEANIC_MUSEUM",  "MUS_ABANDONED_SHIP",
+                                "MUS_LILYCOVE_MUSEUM","MUS_OCEANIC_MUSEUM",  "MUS_ABANDONED_SHIP",
                                 "MUS_AWAKEN_LEGEND","MUS_VICTORY_ROAD","MUS_ABNORMAL_WEATHER", "93. The Trick House",
                                 "MUS_VS_RAYQUAZA", "MUS_VS_GYM_LEADER", "MUS_VS_CHAMPION", "MUS_VS_REGI", "MUS_VS_KYOGRE_GROUDON",
                                 "MUS_VS_RIVAL","MUS_VS_ELITE_FOUR","MUS_VS_AQUA_MAGMA_LEADER",
@@ -159,7 +170,10 @@ const app = Vue.createApp({
                                 this.skipLength = minimumSkipLength;
                                 console.log("faster skip")
                             }
-                        //if trainer id = start of nugget bridge 
+                        //if trainer id = start of nugget bridge <WIP stuff>
+                        
+                        if(musicData[game].music[i].disabled=="stream" || musicData[game].music[i].disabled=="true")
+                            return;
                     }
                     //skip unchecked options
                     if(musicData[game].music[i].battle=="wild" && !this.wildCheck) {
@@ -235,7 +249,7 @@ const app = Vue.createApp({
             if(ch1id != 0) {
                 //these can help add new ids or help catch missing ones
                 console.log("match not found for id:" + ch1id + ", map:" + this.mapper.properties.overworld.mapName.value/*mapMusic*/ + ", bank:" + musicBank);
-                if(this.mapper.properties.meta.state=="Battle") {console.log("In battle")}
+                if(this.mapper.properties.meta?.state=="Battle") {console.log("In battle")}
                 // console.log("text: " + this.mapper.properties.battle.textBuffer.value + " Map group:" + this.mapper.properties.overworld.mapGroup.value + " Map Number:" + this.mapper.properties.overworld.mapNumber.value + " y:" + this.mapper.properties.overworld.y.value + " x:" + this.mapper.properties.overworld.x.value + " time:" + this.mapper.properties.time.current.timeOfDay.value);
             }
                 return null;
