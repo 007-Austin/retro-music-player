@@ -192,10 +192,10 @@ const customTrainers = {
                 "name": "BRUNO",
                 "file": "music/yellow/16 Guide.mp3"
             },
-            {
-                "name": "LORELEI",
-                "file": "music/yellow/26 Last Battle (VS Rival).mp3"
-            },
+            // {
+            //     "name": "LORELEI",
+            //     "file": "music/yellow/26 Last Battle (VS Rival).mp3"
+            // },
             // {
             //     "name": "GIOVANNI",
             //     "file": "music/yellow/49 Unknown Song.mp3"

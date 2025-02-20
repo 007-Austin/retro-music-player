@@ -66,7 +66,10 @@
             <p>Minimum song length for streaming mode: 
             <input v-model="minLength" title="Minimum song length for streaming mode: " @change="saveToLocalStorage('minLength')">
             </p>
-
+            <p>Maximum song loop length for streaming mode: 
+              <input v-model="maxLoopTime" title="Maximum song loop length for streaming mode: " @change="saveToLocalStorage('maxLoopTime')">
+              </p>
+            Current Song Play Time: {{ currentSongPlayTime.toFixed(2) }}
             <h1>Volume controls</h1>
             <div class="slidecontainer">
                 <p>Music: <button @click="toggleAudio"> Play/Pause </button></p>
@@ -92,6 +95,10 @@
                     <input type="checkbox" id="trainerCheck" v-model="trainerCheck" title="Toggle Music for Trainer Battles" checked @change="saveToLocalStorage('trainerCheck')"> <br>
                     <label for="trainerCheck">Custom Trainer Songs: </label>
                     <input type="checkbox" id="customTrainerCheck" v-model="customTrainerCheck" title="Toggle  Custom Music for Certain Trainer Battles" checked @change="saveToLocalStorage('customTrainerCheck')"> <br>
+                    <p>Trainer Aggro Chance:
+                    <input type="range" min="0" max="100" v-model="aggroChance" class="slider" title="Trainer Aggro Chance" @change="saveToLocalStorage('aggroChance')">
+                    <p>Chance: {{ aggroChance }} %</p>
+                    <br>
                     <label for="clickCheck">Clicks: </label>
                     <input type="checkbox" id="clickCheck" v-model="clickCheck" title="Toggle Clicks when pressing A" checked @change="saveToLocalStorage('clickCheck')"> <br>
                     <label for="doorCheck">Doors: </label>

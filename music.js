@@ -7,6 +7,9 @@ const app = Vue.createApp({
             gameIndex: null,
             music: [],
             curSong: new Audio(),
+            currentSongStartTime: Date.now(),
+            currentSongPlayTime: 0,
+            maxLoopTime: 300,
             healFinished: false,
             healed: new Audio(),
             musicVolume: 100,
@@ -16,6 +19,7 @@ const app = Vue.createApp({
             eventSfxVolume: 100,
             wildCheck: true,
             trainerCheck: true,
+            aggroChance: 30,
             customTrainerCheck: true,
             clickCheck: true,
             doorCheck: true,
@@ -75,6 +79,36 @@ const app = Vue.createApp({
                 }
             }, 2); //delay so gamehook can update
 
+            //track playtime
+            let playList = ["music/yellow/04 Pallet Town's Theme.mp3",
+                "music/yellow/07 Pewter City\'s Theme.mp3",
+                "music/yellow/08 Cerulean City\'s Theme.mp3",
+                "music/yellow/09 Celadon City\'s Theme.mp3",
+                "music/yellow/10 Cinnabar Island\'s Theme.mp3",
+                "music/yellow/11 Vermilion City\'s Theme.mp3",
+                 "music/yellow/34 Cycling.mp3",
+                 "music/yellow/12 Lavender Town\'s Theme.mp3",
+                "music/yellow/19 The Road to Viridian City ~ from Pallet.mp3",
+                "music/yellow/03 To Bill\'s Origin ~ From Cerulean.mp3",
+                "music/yellow/13 St. Anne.mp3",
+                "music/yellow/20 The Road to Cerulean ~ from Mt. Moon.mp3",
+                "music/yellow/21 The Road to Lavender Town ~ from Vermilion.mp3",
+                "music/yellow/32 Oak Research Lab.mp3",
+                "music/yellow/02 Opening (part 2).mp3",
+                "music/yellow/05 Pokemon Center.mp3",
+            ]
+            setInterval(()  => {
+                if (!this.curSong.paused) {
+                this.currentSongPlayTime+=.1;
+                }
+                if (this.currentSongPlayTime > this.maxLoopTime) {
+                    console.log("Pick a new song");
+                    let newSong = playList[Math.floor(Math.random() * playList.length)];
+                    this.changeAndPlayAudio(this.curSong,newSong);
+
+                }
+            }, 100);
+                
             // if(selectionType="Streaming") {
             //     this.mapper.properties.overworld.map.change(async (x) => {
             //         channel1id = this.mapper.properties.audio[ch1];
@@ -188,6 +222,14 @@ const app = Vue.createApp({
                     }
                     if(musicData[game].music[i].battle=="trainer" && !this.trainerCheck) {
                         return;
+                    }
+                    if(musicData[game].music[i].battle=="trainer" && musicData[game].music[i].stage=="aggro") {
+                        console.log("Rolling for aggro music.");
+                        let rng = Math.random()*100;
+                        console.log("roll: "+ rng)
+                        if( rng >= this.aggroChance) {
+                            return;
+                        }
                     }
                     if(ch1id==0) {
                         if(this.mapper.properties.audio.channel2MusicID > 0 && musicData[game].music[i].channel2MusicID != this.mapper.properties.audio.channel2MusicID) {
@@ -440,10 +482,13 @@ const app = Vue.createApp({
                 if(curSong.paused) {
                     curSong.currentTime=0;
                     curSong.play();
+                    
                 }
             }
             else{
                 this.curSong.src = newSrc;
+                this.currentSongStartTime  = Date.now();
+                this.currentSongPlayTime=0;
                 try {
                     curSong.load(); // Load the new audio source
                     curSong.addEventListener('canplaythrough', function onCanPlay() {
@@ -617,6 +662,7 @@ const app = Vue.createApp({
             this.loadFromLocalStorage('eventSfxVolume');
             this.loadFromLocalStorage('wildCheck');
             this.loadFromLocalStorage('trainerCheck');
+            this.loadFromLocalStorage('aggroChance');
             this.loadFromLocalStorage('customTrainerCheck');
             this.loadFromLocalStorage('clickCheck');
             this.loadFromLocalStorage('doorCheck');
@@ -625,6 +671,7 @@ const app = Vue.createApp({
             this.loadFromLocalStorage('boulderCheck');
             this.loadFromLocalStorage('selectionType');
             this.loadFromLocalStorage('minLength');
+            this.loadFromLocalStorage('maxLoopTime');
             
         },
         openFileUpload(index) {
