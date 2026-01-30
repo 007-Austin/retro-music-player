@@ -20,6 +20,7 @@ const app = Vue.createApp({
             wildCheck: true,
             trainerCheck: true,
             aggroChance: 30,
+            victoryChance: 20,
             customTrainerCheck: true,
             clickCheck: true,
             doorCheck: true,
@@ -32,6 +33,7 @@ const app = Vue.createApp({
             musicData: musicData,
             showTableSongs: false,
             showTableTrainers: false,
+            playList: [],
             trainerData: [
                 {
                 "class": "PKMN Trainer",
@@ -62,10 +64,15 @@ const app = Vue.createApp({
             if(this.game.includes("Deprecated")) {
                 this.game = this.game.replace(" - Deprecated Mapper", "");
             }
+            if(this.game.includes("&")) {
+                this.game = this.game.replace("&", "and");
+            }
             console.log(this.game);
             let ch1 = musicData[this.game].ch1;
             let map = musicData[this.game].map;
             let bank = musicData[this.game].bank;
+            let container = musicData[this.game].container;
+
             //play music initially on page load
             setTimeout(() => { //delay so gamehook can update
                 this.pickSong(this.mapper.properties.audio[ch1], this.mapper.properties.audio[map]?.value, this.mapper.properties.audio[bank]?.value, this.mapper, this.game);
@@ -74,13 +81,14 @@ const app = Vue.createApp({
                 if(this.mapper.properties.audio[ch1] == 0)
                 {
                     if(musicData[this.game]?.initialSong) {
-                        this.playSong(musicData[this.game].initialSong);
+                        this.playFile(musicData[this.game].initialSong);
                     }
                 }
             }, 2); //delay so gamehook can update
 
             //track playtime
-            let playList = ["music/yellow/04 Pallet Town's Theme.mp3",
+            playList = [musicData[this.game]?.idlePlaylist];
+            /*let playList = ["music/yellow/04 Pallet Town's Theme.mp3",
                 "music/yellow/07 Pewter City\'s Theme.mp3",
                 "music/yellow/08 Cerulean City\'s Theme.mp3",
                 "music/yellow/09 Celadon City\'s Theme.mp3",
@@ -96,14 +104,17 @@ const app = Vue.createApp({
                 "music/yellow/32 Oak Research Lab.mp3",
                 "music/yellow/02 Opening (part 2).mp3",
                 "music/yellow/05 Pokemon Center.mp3",
-            ]
+            ]*/
             setInterval(()  => {
                 if (!this.curSong.paused) {
                 this.currentSongPlayTime+=.1;
                 }
                 if (this.currentSongPlayTime > this.maxLoopTime) {
-                    console.log("Pick a new song");
-                    let newSong = playList[Math.floor(Math.random() * playList.length)];
+                    //console.log("Pick a new song");
+
+                    let n = Math.floor(Math.random() * playList[0].length);
+                    let newSong = playList[0][n];
+
                     this.changeAndPlayAudio(this.curSong,newSong);
 
                 }
@@ -123,7 +134,7 @@ const app = Vue.createApp({
             //This part will watch constantly for the music ID to change
             this.mapper.properties.audio[ch1].change(async (x) => {
                 channel1id = this.mapper.properties.audio[ch1];
-
+                //console.log("id: " + channel1id);
                 setTimeout(() => { //delay so gamehook can update
                 this.pickSong(this.mapper.properties.audio[ch1]?.value, this.mapper.properties.audio[map]?.value, this.mapper.properties.audio[bank]?.value, this.mapper, this.game);
                 }, 2); //delay so gamehook can update
@@ -165,6 +176,7 @@ const app = Vue.createApp({
                     (musicData[game].music[i][musicData[game].map] == mapMusic || musicData[game].music[i][musicData[game].map] == undefined) &&
                     (musicData[game].music[i][musicData[game].bank] == musicBank || musicData[game].music[i][musicData[game].bank] == undefined)
                 ) {
+                    //the following if statements check for situations where we don't want to play the song yet
                     if(this.selectionType=="Streaming")
                     {
                         // if(this.curSong.currentTime>0 && this.curSong.currentTime < this.minLength){
@@ -175,9 +187,11 @@ const app = Vue.createApp({
                         // }
                         
                         if(this.curSong.currentTime>0 && this.curSong.currentTime < this.skipLength){
+                            let prio = false; 
+                            let cust = false;
                             let importantTracks = [
                                 //gen 1 kanto
-                                "Hall Of Fame","Jigglypuff's song","SS Anne","Rival","Hurry Along",
+                                "Hall Of Fame","Jigglypuff's song","SS Anne","Rival",
                                 "Viridian Forest","Cave Mt Moon Rock Tunnel","Gym Leader Battle","Pokemon Mansion",
                                 "Silph Co","Champion Battle",
                                 //gen 2
@@ -190,20 +204,50 @@ const app = Vue.createApp({
                                 "MUS_AWAKEN_LEGEND","MUS_VICTORY_ROAD","MUS_ABNORMAL_WEATHER", "93. The Trick House",
                                 "MUS_VS_RAYQUAZA", "MUS_VS_GYM_LEADER", "MUS_VS_CHAMPION", "MUS_VS_REGI", "MUS_VS_KYOGRE_GROUDON",
                                 "MUS_VS_RIVAL","MUS_VS_ELITE_FOUR","MUS_VS_AQUA_MAGMA_LEADER",
+
+                                //firered
+                                //still need to refactor this
+                                "MUS_ROCKET_HIDEOUT","MUS_HALL_OF_FAME","MUS_VIRIDIAN_FOREST","MUS_MT_MOON","MUS_POKE_MANSION",
+                                "MUS_VICTORY_ROAD","MUS_SS_ANNE","MUS_SILPH","MUS_ENCOUNTER_RIVAL","MUS_SLOW_PALLET",
                             ];
-                            if(!importantTracks.includes(musicData[game].music[i].song)) {
+                            
+                            if(importantTracks.includes(musicData[game].music[i].song)) {
+                                prio = true;
+                            }
+       
+                            if(customTrainers[game]){
+                                //TODO: refactor - should move the path to the custom trainer's name to the musicData file as this varies per game
+                                for(let j = 0; j < customTrainers[game].trainers?.length; j++) {
+                                    if(((this.mapper.properties.battle.textBuffer?.value == customTrainers[game].trainers[j].name) && customTrainers[game].trainers[j].name) || 
+                                        ((this.mapper.properties.battle.trainer.name?.value == customTrainers[game].trainers[j].name) && customTrainers[game].trainers[j].name) || 
+                                        ((this.mapper.properties.battle.trainer.class?.value == customTrainers[game].trainers[j].name) && customTrainers[game].trainers[j].name) || 
+                                        ((this.mapper.properties.battle.trainer.opponent?.value == customTrainers[game].trainers[j].opponent) && customTrainers[game].trainers[j].opponent) ||
+                                        ((this.mapper.properties.battle.trainer.opponentA?.value == customTrainers[game].trainers[j].opponentA) && customTrainers[game].trainers[j].opponentA)) {
+                                            console.log("Now facing: " +this.mapper.properties?.battle?.trainer?.name?.value);
+                                            console.log("Now playing: "+ customTrainers[game]?.trainers[j]?.name)
+                                            console.log("index: " +j)
+                                            if(this.customTrainerCheck && musicData[game].music[i].stage=="battle"){
+                                                
+                                                cust = true;
+                                            }
+
+                                    }
+                                }
+                            }                      
+                            if(!prio && !cust) {
                                 return;
                             }
                         }
-                        let minimumSkipLength = musicData[game].music[i].skippableAfter;
+                        
+                        /*let minimumSkipLength = musicData[game].music[i].skippableAfter;
                             if(!minimumSkipLength || minimumSkipLength > this.minLength) { 
                                 this.skipLength = this.minLength;
                                 console.log("regular skip length;")
                             }
                             else {
                                 this.skipLength = minimumSkipLength;
-                                console.log("faster skip")
-                            }
+                                console.log("faster skip "+ this.skipLength)
+                            }*/
                         //if trainer id = start of nugget bridge <WIP stuff>
                         
                         if(musicData[game].music[i].disabled=="stream" || musicData[game].music[i].disabled=="true")
@@ -224,16 +268,24 @@ const app = Vue.createApp({
                         return;
                     }
                     if(musicData[game].music[i].battle=="trainer" && musicData[game].music[i].stage=="aggro") {
-                        console.log("Rolling for aggro music.");
+                        //console.log("Rolling for aggro music.");
                         let rng = Math.random()*100;
-                        console.log("roll: "+ rng)
+                        //console.log("roll: "+ rng)
                         if( rng >= this.aggroChance) {
+                            return;
+                        }
+                    }
+                    if(musicData[game].music[i].battle=="trainer" && musicData[game].music[i].stage=="victory") {
+                        //console.log("Rolling for victory music.");
+                        let rng = Math.random()*100;
+                        //console.log("roll: "+ rng)
+                        if( rng >= this.victoryChance) {
                             return;
                         }
                     }
                     if(ch1id==0) {
                         if(this.mapper.properties.audio.channel2MusicID > 0 && musicData[game].music[i].channel2MusicID != this.mapper.properties.audio.channel2MusicID) {
-                            console.log("this track is using ch2 but not ch1. ID: " + this.mapper.properties.audio.channel2MusicID)
+                            //console.log("this track is using ch2 but not ch1. ID: " + this.mapper.properties.audio.channel2MusicID)
                             //console.log("ID2:" + this.mapper.properties.audio.channel2MusicID + "table id2: " + musicData[game].music[i].channel2MusicID);
                             continue;
                         }
@@ -266,32 +318,32 @@ const app = Vue.createApp({
                                         console.log("Now facing: " +this.mapper.properties?.battle?.trainer?.opponent?.value);
                                         console.log("Now playing: "+ customTrainers[game]?.trainers[j]?.opponent)
                                         console.log("index: " +j)
-                                    this.playSong(customTrainers[game].trainers[j]?.file);
+                                    this.playSong(customTrainers[game].trainers[j]);
                                     return;
                                 }
                             }
                             for(let j = 0; j < customTrainers[game].classes?.length; j++) {
                                 if(this.mapper.properties.battle.trainer.class == customTrainers[game].classes[j].class) {
-                                    this.playSong(customTrainers[game].classes[j].file);
+                                    this.playSong(customTrainers[game].classes[j]);
                                     return;
                                 }
                             }
                             for(let j = 0; j < customTrainers[game].types?.length; j++) {
                                 if(musicData[game].music[i].battle == customTrainers[game].types[j].type) {
-                                    this.playSong(customTrainers[game].types[j].file);
+                                    this.playSong(customTrainers[game].types[j]);
                                     return;
                                 }
                             }
                         }
                     }
-                    this.playSong(musicData[game].music[i].file);
+                    this.playSong(musicData[game].music[i]);
                     return musicData[game].music[i].file;
                 }
             }
             if(ch1id != 0) {
                 //these can help add new ids or help catch missing ones
-                console.log("match not found for id:" + ch1id + ", map:" + this.mapper.properties.overworld.mapName.value/*mapMusic*/ + ", bank:" + musicBank);
-                if(this.mapper.properties.meta?.state=="Battle") {console.log("In battle")}
+                //console.log("match not found for id:" + ch1id + ", map:" + this.mapper.properties.overworld.map?.value/*mapMusic*/ + ", bank:" + musicBank);
+                //if(this.mapper.properties.meta?.state=="Battle") {console.log("In battle")}
                 // console.log("text: " + this.mapper.properties.battle.textBuffer.value + " Map group:" + this.mapper.properties.overworld.mapGroup.value + " Map Number:" + this.mapper.properties.overworld.mapNumber.value + " y:" + this.mapper.properties.overworld.y.value + " x:" + this.mapper.properties.overworld.x.value + " time:" + this.mapper.properties.time.current.timeOfDay.value);
             }
                 return null;
@@ -308,7 +360,7 @@ const app = Vue.createApp({
                 return;
             }
             setTimeout(() => {
-            console.log("overworld:  " + overworld);
+            //console.log("overworld:  " + overworld);
             for (let i = 0; i < musicData[game].music.length; i++) {  
                 /*if (
                     musicData[game].music[i][musicData[game].ch1] == ch1id &&
@@ -329,12 +381,9 @@ const app = Vue.createApp({
                 ) {
                     if(this.selectionType=="Streaming")
                     {
-                        console.log("1")
                         if(this.curSong.currentTime>0 && this.curSong.currentTime < this.minLength){
-                            console.log("2")
-                            console.log(musicData[game].music[i].priority!="high")
+                            //console.log(musicData[game].music[i].priority!="high")
                             if(musicData[game].music[i].battle!="champion" && musicData[game].music[i].priority!="high") {
-                                console.log("3")
                                 return;
                             }
                         }
@@ -355,7 +404,7 @@ const app = Vue.createApp({
                     }
                     if(ch1id==0) {
                         if(this.mapper.properties.audio.channel2MusicID > 0 && musicData[game].music[i].channel2MusicID != this.mapper.properties.audio.channel2MusicID) {
-                            console.log("this track is using ch2 but not ch1. ID: " + this.mapper.properties.audio.channel2MusicID)
+                            //console.log("this track is using ch2 but not ch1. ID: " + this.mapper.properties.audio.channel2MusicID)
                             //console.log("ID2:" + this.mapper.properties.audio.channel2MusicID + "table id2: " + musicData[game].music[i].channel2MusicID);
                             continue;
                         }
@@ -380,25 +429,25 @@ const app = Vue.createApp({
                         if(customTrainers[game]){
                             for(let j = 0; j < customTrainers[game].trainers.length; j++) {
                                 if(this.mapper.properties.battle.textBuffer == customTrainers[game].trainers[j].name || this.mapper.properties.battle.trainer.name == customTrainers[game].trainers[j].name || this.mapper.properties.battle.trainer.class == customTrainers[game].trainers[j].name) {
-                                    this.playSong(customTrainers[game].trainers[j].file);
+                                    this.playSong(customTrainers[game].trainers[j]);
                                     return;
                                 }
                             }
                             for(let j = 0; j < customTrainers[game].classes.length; j++) {
                                 if(this.mapper.properties.battle.trainer.class == customTrainers[game].classes[j].class) {
-                                    this.playSong(customTrainers[game].classes[j].file);
+                                    this.playSong(customTrainers[game].classes[j]);
                                     return;
                                 }
                             }
                             for(let j = 0; j < customTrainers[game].types.length; j++) {
                                 if(musicData[game].music[i].battle == customTrainers[game].types[j].type) {
-                                    this.playSong(customTrainers[game].types[j].file);
+                                    this.playSong(customTrainers[game].types[j]);
                                     return;
                                 }
                             }
                         }
                     }
-                    this.playSong(musicData[game].music[i].file);
+                    this.playSong(musicData[game].music[i]);
                     return musicData[game].music[i].file;
                 }
             }
@@ -410,18 +459,51 @@ const app = Vue.createApp({
                 return null;
                 }, 2); //delay so gamehook can update
         },
-
-        playSong(yourSong) {
-            
-            if(!this.curSong || !this.healed){
+        playFile(yourSong) {
+            //I don't remember why this was checking this.cursong
+            //I feel like this may have broken things occasionally if it was null
+            /*if(!this.curSong || !this.healed){
                 console.log("error:this.curSong undefined")
+                return;
+            }*/
+            if(!this.healed){
                 return;
             }
             else{
-                if(((this.getRelativePath(this.curSong.src) != yourSong) && this.healed.paused) || this.healFinished === true) {
-                    this.changeAndPlayAudio(this.curSong, yourSong);
+                if(((this.getRelativePath(this.curSong.src) != file) && this.healed.paused) || this.healFinished === true) {
+                    this.changeAndPlayAudio(this.curSong, file);
                     this.curSong.volume = this.musicOutput;
                     this.healFinished = false;
+                    
+                }
+            }
+        },
+        playSong(yourSong) {
+            let file = yourSong.file;
+            const vm = this;
+            //I don't remember why this was checking this.cursong
+            //I feel like this may have broken things occasionally if it was null
+            /*if(!this.curSong || !this.healed){
+                console.log("error:this.curSong undefined")
+                return;
+            }*/
+            if(!this.healed){
+                return;
+            }
+            else{
+                if(((this.getRelativePath(this.curSong?.src) != file) && this.healed.paused) || this.healFinished === true) {
+                    this.changeAndPlayAudio(this.curSong, file);
+                    this.curSong.volume = this.musicOutput;
+                    this.healFinished = false;
+                    let minimumSkipLength = yourSong.skippableAfter;
+                    if(!minimumSkipLength || minimumSkipLength > vm.minLength) { 
+                        vm.skipLength = vm.minLength;
+                        //console.log("regular skip length;")
+                    }
+                    else {
+                        vm.skipLength = minimumSkipLength;
+                        //console.log("faster skip "+ vm.skipLength)
+                    }
                 }
             }
         },
@@ -477,7 +559,15 @@ const app = Vue.createApp({
 
         changeAndPlayAudio(curSong, newSrc) {
             const vm = this;
-            if(this.getRelativePath(curSong.src) == newSrc) {
+            vm.game = vm.mapper.meta.gameName;
+            //onsole.log("game test: "+vm.mapper.meta.gameName)
+            if(vm.game.includes("Deprecated")) {
+                vm.game = vm.game.replace(" - Deprecated Mapper", "");
+            }
+            if(vm.game.includes("&")) {
+                vm.game = vm.game.replace("&", "and");
+            }
+            if(vm.getRelativePath(curSong.src) == newSrc) {
                 // console.log("already playing");
                 if(curSong.paused) {
                     curSong.currentTime=0;
@@ -486,9 +576,9 @@ const app = Vue.createApp({
                 }
             }
             else{
-                this.curSong.src = newSrc;
-                this.currentSongStartTime  = Date.now();
-                this.currentSongPlayTime=0;
+                vm.curSong.src = newSrc;
+                vm.currentSongStartTime  = Date.now();
+                vm.currentSongPlayTime=0;
                 try {
                     curSong.load(); // Load the new audio source
                     curSong.addEventListener('canplaythrough', function onCanPlay() {
@@ -497,7 +587,17 @@ const app = Vue.createApp({
                         // vm.playAudioWithIntroSkip(curSong,curSong.src)
                         curSong.play();
                         curSong.loop=true;
-                        // console.log("now playing: " +this.curSong.src)
+                        //console.log("vm.game: "+ vm.game);
+                        /*let minimumSkipLength = musicData[vm.game].music[i]?.skippableAfter;
+                        if(!minimumSkipLength || minimumSkipLength > vm.minLength) { 
+                            vm.skipLength = vm.minLength;
+                            console.log("regular skip length;")
+                        }
+                        else {
+                            vm.skipLength = minimumSkipLength;
+                            console.log("faster skip "+ vm.skipLength)
+                        }*/
+                        // console.log("now playing: " +vm.curSong.src)
                     });
                 }
                 catch{
@@ -564,6 +664,9 @@ const app = Vue.createApp({
             if(this.game.includes("Deprecated")) {
                 this.game = this.game.replace(" - Deprecated Mapper", "");
             }
+            if(this.game.includes("&")) {
+                this.game = this.game.replace("&", "and");
+            }
             if(soundData[this.game] == undefined) {
                 console.log("Sound effect data is not present for this game: " + this.game);
                 return;
@@ -581,6 +684,9 @@ const app = Vue.createApp({
             this.game = this.mapper.meta.gameName;
             if(this.game.includes("Deprecated")) {
                 this.game = this.game.replace(" - Deprecated Mapper", "");
+            }
+            if(this.game.includes("&")) {
+                this.game = this.game.replace("&", "and");
             }
             let chx = "ch" + channel.toString();
             if(soundData[this.game] == undefined) {
@@ -636,10 +742,10 @@ const app = Vue.createApp({
                         }
                     }
                     // uncomment this if adding IDs for a new game
-                    if(this.mapper.properties.audio[chxname] != 0 && this.mapper.properties.audio[chxname] > 20) {
-                        console.log("Channel "+chx+" match not found for id:" + this.mapper.properties.audio[chxname]);
+                    //if(this.mapper.properties.audio[chxname] != 0 && this.mapper.properties.audio[chxname] > 20) {
+                        //console.log("Channel "+chx+" match not found for id:" + this.mapper.properties.audio[chxname]);
                         // console.log("text: " + this.mapper.properties.battle.textBuffer.value + " Map group:" + this.mapper.properties.overworld.mapGroup.value + " Map Number:" + this.mapper.properties.overworld.mapNumber.value + " y:" + this.mapper.properties.overworld.y.value + " x:" + this.mapper.properties.overworld.x.value + " time:" + this.mapper.properties.time.current.timeOfDay.value);
-                    }
+                    //}
                 }, 2); //delay so gamehook can update. This is to avoid race conditions
             })
             return null;
@@ -663,6 +769,7 @@ const app = Vue.createApp({
             this.loadFromLocalStorage('wildCheck');
             this.loadFromLocalStorage('trainerCheck');
             this.loadFromLocalStorage('aggroChance');
+            this.loadFromLocalStorage('victoryChance');
             this.loadFromLocalStorage('customTrainerCheck');
             this.loadFromLocalStorage('clickCheck');
             this.loadFromLocalStorage('doorCheck');
@@ -746,7 +853,9 @@ const app = Vue.createApp({
         poisonCheck() { this.saveToLocalStorage('poisonCheck'); },
         boulderCheck() { this.saveToLocalStorage('boulderCheck'); },
         selectionType() { this.saveToLocalStorage('selectionType'); },
-        minLength() {this.saveToLocalStorage('minLength')},
+        minLength() {this.saveToLocalStorage('minLength');
+                     this.skipLength = this.minLength; //update skip length to match min length
+        },
         // ready() {
         //     if(!this.ready) {
         //         console.log("no mapper loaded")

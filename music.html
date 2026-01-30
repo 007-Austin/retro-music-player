@@ -99,6 +99,10 @@
                     <input type="range" min="0" max="100" v-model="aggroChance" class="slider" title="Trainer Aggro Chance" @change="saveToLocalStorage('aggroChance')">
                     <p>Chance: {{ aggroChance }} %</p>
                     <br>
+                    <p>Battle Victory Chance:
+                      <input type="range" min="0" max="100" v-model="victoryChance" class="slider" title="Battle Victory Chance" @change="saveToLocalStorage('victoryChance')">
+                      <p>Chance: {{ victoryChance }} %</p>
+                      <br>
                     <label for="clickCheck">Clicks: </label>
                     <input type="checkbox" id="clickCheck" v-model="clickCheck" title="Toggle Clicks when pressing A" checked @change="saveToLocalStorage('clickCheck')"> <br>
                     <label for="doorCheck">Doors: </label>

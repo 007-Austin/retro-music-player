@@ -25,6 +25,341 @@ const musicData = {
     //         },
     //     ],
     // },
+        "Pokemon Black - Beta" : { //name of game as it appears in gamehook mapper meta
+        "name" : "Pokemon Black - Beta",
+        //left side is always "ch#"
+         //right side should be how it appears in gamehook
+         //this is to avoid problems when ie crystal and yellow have different property names in gamehook
+         "container" : "overworld",
+         "ch1" : "map_index",
+         "ch2" : "map_name",
+
+         //these are extra properties just in case two songs have the same ID
+        //this doesn't happen in crystal but does happen in rb/y
+        "bank" : "map_index",
+        "map" : "map_index",
+        "music": [
+            {
+                "song": "Nuvema Town",
+                "file": "music/black/07 - Nuvema Town.mp3",
+                "map_index": 389,
+                // 390, 391 player house
+            },
+            {
+                "song": "Juniper Pokemon lab",
+                "file": "music/black/11 - Juniper Pokémon Lab.mp3",
+                "map_index": 396,
+            },
+            {
+                "song": "Route 1",
+                "file": "music/black/14 - Route 1.mp3",
+                "map_index": 317,
+            },
+            {
+                "song": "Acculuma Town",
+                "file": "music/black/18 - Accumula Town.mp3",
+                "map_index": 397,
+                // FURRET WALK
+            },
+            {
+                "song": "Route 2",
+                "file": "music/black/03 - Route 2 (Winter).mp3",
+                "map_index": 319,
+                // different themes per season
+            },
+            {
+                "song": "Striaton City",
+                "file": "music/black/32 - Striaton City.mp3",
+                "map_index": 6,
+            },
+            {
+                "song": "Dreamyard",
+                "file": "music/black/34 - Dreamyard.mp3",
+                "map_index": 152,
+            },
+            {
+                "song": "Trainer School",
+                "file": "music/black/no idea if this has special music",
+                "map_index": 15,
+            },
+            {
+                "song": "Striaton Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 7,
+            },
+            {
+                "song": "Route 3",
+                "file": "music/black/03 - Route 2 (Winter).mp3",
+                "map_index": 321,
+                // uses route 2 music
+            },
+            {
+                "song": "Wellspring Cave",
+                "file": "music/black/08 - Chargestone Cave.mp3",
+                "map_index": 324,
+            },
+            {
+                "song": "Nacrene City",
+                "file": "music/black/43 - Nacrene City.mp3",
+                "map_index": 16,
+            },
+            {
+                "song": "Nacrene Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 18,
+                // 19 for Lenora's room
+            },
+            {
+                "song": "Pinwheel Forest Outer",
+                "file": "music/black/34 - Dreamyard.mp3",
+                "map_index": 154,
+            },
+            {
+                "song": "Pinwheel Forest Inner",
+                "file": "music/black/34 - Dreamyard.mp3",
+                "map_index": 155,
+            },
+            {
+                "song": "Skyarrow Bridge",
+                "file": "music/black/52 - Skyarrow Bridge.mp3",
+                "map_index": 249,
+            },
+            {
+                "song": "Castelia City",
+                "file": "music/black/53 - Castelia City.mp3",
+                "map_index": 28,
+                // 28-39 ( I think) are basically all this city (29 is the gym)
+            },
+            {
+                "song": "Castelia Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 29,
+            },
+            {
+                "song": "Route 4",
+                "file": "music/black/08 - Route 4 (Winter).mp3",
+                "map_index": 326,
+                // seasonal
+            },
+            {
+                "song": "Desert Resort",
+                "file": "music/black/08 - Route 4 (Winter).mp3",
+                "map_index": 157,
+                // Same as Route 4
+            },
+            {
+                "song": "Desert Resort upper",
+                "file": "music/black/08 - Chargestone Cave.mp3",
+                "map_index": 158,
+                // Chargestone
+            },
+            {
+                "song": "Relic Castle",
+                "file": "music/black/19 - Relic Castle.mp3",
+                "map_index": 160,
+                // 160-164
+            },
+            {
+                "song": "Relic Castle - Bottom",
+                "file": "music/black/19 - Relic Castle.mp3",
+                "map_index": 165,
+            },
+            {
+                "song": "Nimbasa City",
+                "file": "music/black/57 - Nimbasa City.mp3",
+                "map_index": 62,
+            },
+            {
+                "song": "Musical Theater",
+                "file": "music/black/16 - Musical Theater.mp3",
+                "map_index": 77,
+                // 18 - Dress Up with Props.mp3 for dress-up game
+            },
+            {
+                "song": "Route 16",
+                "file": "music/black/",
+                "map_index": 383,
+                // Same as Route 4
+            },
+            {
+                "song": "Nimbasa City - East",
+                "file": "music/black/",
+                "map_index": 64,
+                // x: 3506176 and y: 1015808 / 1081344 for ferris wheel?
+            },
+            {
+                "song": "Nimbasa Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 63,
+            },
+            {
+                "song": "Route 5",
+                "file": "music/black/08 - Route 4 (Winter).mp3",
+                "map_index": 329,
+                // Alder theme maybe?
+            },
+            {
+                "song": "Driftveil Drawbridge",
+                "file": "music/black/",
+                "map_index": 253,
+            },
+            {
+                "song": "Driftveil City",
+                "file": "music/black/02 - Driftveil City.mp3",
+                "map_index": 9,
+            },
+            {
+                "song": "Cold Storage Outer",
+                "file": "music/black/",
+                "map_index": 191,
+            },
+            {
+                "song": "Cold Storage Inner",
+                "file": "music/black/03 - Cold Storage.mp3",
+                "map_index": 192,
+                // 193 also
+            },
+            {
+                "song": "Driftveil Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 98,
+                // 97 also
+            },
+            {
+                "song": "Route 6",
+                "file": "music/black/35 - Route 6 (Winter).mp3",
+                "map_index": 331,
+                // seasonal, 194 also
+            },
+            {
+                "song": "Chargestone Cave",
+                "file": "music/black/08 - Chargestone Cave.mp3",
+                "map_index": 195,
+                // Also 196, 197,
+            },
+            {
+                "song": "Mistralton City",
+                "file": "music/black/09 - Mistralton City.mp3",
+                "map_index": 10,
+            },
+            {
+                "song": "Mistralton Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 108,
+            },
+            {
+                "song": "Route 7",
+                "file": "music/black/35 - Route 6 (Winter).mp3",
+                "map_index": 337,
+                // Same as Route 6
+            },
+            {
+                "song": "Twist Mountain",
+                "file": "music/black/03 - Cold Storage.mp3",
+                "map_index": 198,
+                // 199, 200, 201, 202
+            },
+            {
+                "song": "Icirrus City",
+                "file": "music/black/14 - Icirrus City.mp3",
+                "map_index": 113,
+            },
+            {
+                "song": "Icirrus Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 114,
+            },
+            {
+                "song": "Dragonspiral Tower",
+                "file": "music/black/15 - Dragonspiral Tower.mp3",
+                "map_index": 205,
+                // Up through 212
+            },
+            {
+                "song": "Dragon Sprial Top Floor",
+                "file": "music/black/17 - Dragonspiral Tower Top Floor.mp3",
+                "map_index": 213,
+            },
+            {
+                "song": "Route 8",
+                "file": "music/black/35 - Route 6 (Winter).mp3",
+                "map_index": 345,
+                // seasonal, route 6
+            },
+            {
+                "song": "Moor of Icirrus",
+                "file": "music/black/34 - Dreamyard.mp3",
+                "map_index": 346,
+            },
+            {
+                "song": "Tubeline Bridge",
+                "file": "music/black/21 - Tubeline Bridge.mp3",
+                "map_index": 254,
+            },
+            {
+                "song": "Route 9",
+                "file": "music/black/35 - Route 6 (Winter).mp3",
+                "map_index": 348,
+                // seasonal, route 6
+            },
+            {
+                "song": "Route 9 Mall",
+                "file": "music/black/22 - Shopping Mall Nine.mp3",
+                "map_index": 350,
+                // 351
+            },
+            {
+                "song": "Opelucid City",
+                "file": "music/black/24 - Opelucid City (Black).mp3",
+                "map_index": 120,
+                // 25 - Opelucid City (White).mp3 in pokemon white
+            },
+            {
+                "song": "Opelucid Gym",
+                "file": "music/black/45 - Pokémon Gym.mp3",
+                "map_index": 121,
+            },
+            {
+                "song": "Route 10",
+                "file": "music/black/26 - Route 10.mp3",
+                "map_index": 355,
+            },
+            {
+                "song": "Victory Road - Badge gates",
+                "file": "music/black/27 - Victory Road.mp3",
+                "map_index": 356,
+                // 356-364
+            },
+            {
+                "song": "Victory Road",
+                "file": "music/black/27 - Victory Road.mp3",
+                "map_index": 214,
+                // 214-226
+            },
+            {
+                "song": "Pokemon League",
+                "file": "music/black/",
+                "map_index": 136,
+            },
+            {
+                "song": "N's castle 1f",
+                "file": "music/black/34 - N's Castle.mp3",
+                "map_index": 264,
+                // heal room 267, goes up to 277
+            },
+            {
+                "song": "N's Room",
+                "file": "music/black/35 - The Pokémon Child, N.mp3",
+                "map_index": 274,
+            },
+            {
+                "song": "Gatehouse",
+                "file": "music/black/51 - Gate.mp3",
+                //"map_index": ,
+                // MANY
+            }
+        ],
+    },
     "Pokemon FireRed and LeafGreen" : {
         "name" : "Pokemon FireRed and LeafGreen",
         "ch1" : "musicID",
@@ -32,6 +367,25 @@ const musicData = {
         "bank" : "",
         "map" : "",
         "initialSong" : "music/firered/03. Title Screen.flac",
+        "idlePlaylist" : [
+            "music/firered/63. Sevii Islands.flac",
+            "music/firered/64. Sevii Islands꞉ Six & Seven Islands.flac",
+            "music/firered/59. Sevii Islands꞉ Four & Five Islands.flac",
+            "music/firered/15. Pewter City Theme.flac",
+            "music/firered/57. Pokémon Net Center.flac",
+            "music/firered/06. Pallet Town Theme.flac",
+            "music/firered/08. Professor Oak's Laboratory.flac",
+            "music/firered/21. Pokémon Center.flac",
+            "music/firered/52. The Sea.flac",
+            "music/firered/36. The S.S. Anne.flac",
+            "music/firered/37. Cycling.flac",
+            "music/firered/38. Lavender Town Theme.flac",
+            "music/firered/40. Celadon City Theme.flac",
+            "music/firered/41. Rocket Game Corner.flac",
+            "music/firered/50. Fuchsia City Theme.flac",
+            "music/firered/55. Cinnabar Island Theme.flac",
+            "music/firered/35. Vermilion City Theme.flac",
+        ],
         "music": [
             {
                 "song": "silent",
@@ -42,11 +396,15 @@ const musicData = {
                 "song": "MUS_EVOLVED",
                 "file": "music/firered/31. Fanfare꞉ Evolution.flac",
                 "musicID": 259,
+                "skippableAfter" : 5,
+                "disabled" : "stream",
             },
             {
                 "song": "MUS_OBTAIN_BADGE",
                 "file": "music/firered/29. Fanfare꞉ Badge Obtained.flac",
                 "musicID": 260,
+                "skippableAfter" : 5,
+                "disabled" : "stream",
             },
             {
                 "song": "MUS_EVOLUTION",
@@ -82,6 +440,7 @@ const musicData = {
                 "song": "MUS_INTRO_FIGHT",
                 "file": "music/firered/02. Opening Movie.flac",
                 "musicID": 277,
+                "disabled" : "stream",
             },
             {
                 "song": "MUS_TITLE",
@@ -108,21 +467,24 @@ const musicData = {
                 "file": "music/firered/46. A Trainer Appears (Bad Guy Version).flac",
                 "musicID": 283,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 20,
             },
             {
                 "song": "MUS_ENCOUNTER_GIRL",
                 "file": "music/firered/33. A Trainer Appears (Girl Version).flac",
                 "musicID": 284,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 20,
             },
             {
                 "song": "MUS_ENCOUNTER_BOY",
                 "file": "music/firered/20. A Trainer Appears (Boy Version).flac",
                 "musicID": 285,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 20,
             },
             {
                 "song": "MUS_HALL_OF_FAME",
@@ -257,21 +619,24 @@ const musicData = {
                 "file": "music/firered/12. Victory! (Trainer Battle).flac",
                 "musicID": 310,
                 "battle" : "trainer",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5
             },
             {
                 "song": "MUS_VICTORY_WILD",
                 "file": "music/firered/19. Victory! (Wild Pokémon).flac",
                 "musicID": 311,
                 "battle" : "wild",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 5
             },
             {
                 "song": "MUS_VICTORY_GYM_LEADER",
                 "file": "music/firered/28. Victory! (Gym Leader Battle).flac",
                 "musicID": 312,
                 "battle" : "gymLeader",
-                "stage" : "victory"
+                "stage" : "victory",
+                "skippableAfter" : 10
             },
             {
                 "song": "MUS_VERMILLION",
@@ -288,19 +653,23 @@ const musicData = {
                 "file": "music/firered/10. A Rival Appears.flac",
                 "musicID": 315,
                 "battle" : "rival",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 15,
             },
             {
                 "song": "MUS_RIVAL_EXIT",
                 "file": "music/firered/10. A Rival Appears.flac", //missing actual file for now
                 "musicID": 316,
                 "battle" : "rival",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 10,
             },
             {
                 "song": "MUS_OBTAIN_KEY_ITEM",
                 "file": "music/firered/67. Fanfare꞉ Item Obtained (Version 2).flac", //double check this
                 "musicID": 318,
+                "skippableAfter" : 5,
+                "disabled" : "stream",
             },
             {
                 "song": "MUS_POKE_JUMP",
@@ -336,6 +705,8 @@ const musicData = {
                 "song": "MUS_TEACHY_TV_SHOW",
                 "file": "music/firered/16. Teachy TV Menu.flac",
                 "musicID": 332,
+                "skippableAfter" : 17,
+                "disabled" : "stream",
             },
             {
                 "song": "MUS_SEVII_ROUTE",
@@ -393,7 +764,8 @@ const musicData = {
                 "file": "music/firered/26. Tense Battle!.flac",
                 "musicID": 342,
                 "battle" : "gymLeader",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 15,
             },
             {
                 "song": "MUS_ENCOUNTER_DEOXYS",
@@ -416,6 +788,7 @@ const musicData = {
                 "song": "MUS_TEACHY_TV_MENU",
                 "file": "music/firered/16. Teachy TV Menu.flac",
                 "musicID": 346,
+                "disabled" : "stream",
             },
         ],
     },
@@ -427,6 +800,32 @@ const musicData = {
         "bank" : "musicID",
         "map" : "musicID",
         "initialSong" : "music/emerald/03. Title Screen꞉ Main Theme.flac",
+        "idlePlaylist" : ["music/emerald/11. Route 101.flac",
+            "music/emerald/34. Route 110.flac",
+            "music/emerald/57. Route 120.flac",
+            "music/emerald/20. Petalburg City.flac",
+            "music/emerald/12. Oldale Town.flac",
+            "music/emerald/49. Pokemon Gym.flac",
+            "music/emerald/62. Museum.flac",
+            "music/emerald/04. Introductions.flac",
+            "music/emerald/33. Oceanic Museum.flac",
+            "music/emerald/56. Fortree City.flac",
+            "music/emerald/41. Verdanturf Town.flac",
+            "music/emerald/27. Rustboro City.flac",
+            "music/emerald/22. Route 104.flac",
+            "music/emerald/55. Route 119.flac",
+            "music/emerald/68. Poke Mart.flac",
+            "music/emerald/05. Littleroot Town.flac",
+            "music/emerald/61. Lilycove City.flac",
+            "music/emerald/42. Route 113.flac",
+            "music/emerald/85. Ever Grande City.flac",
+            "music/emerald/36. Game Corner.flac",
+            "music/emerald/30. Dewford Town.flac",
+            "music/emerald/32. Slateport City.flac",
+            "music/emerald/44. Fallarbor Town.flac",
+            "music/emerald/81. Sootopolis City.flac",
+
+        ],
         "music": [
             {
                 "song": "silent",
@@ -548,14 +947,16 @@ const musicData = {
                 "file": "music/emerald/31. Trainers' Eyes Meet (TuberFE).flac",
                 "musicID": 379,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 15,
             },
             {
                 "song": "MUS_ENCOUNTER_MALE",
                 "file": "music/emerald/15. Trainers' Eyes Meet (Youngster).flac",
                 "musicID": 380,
                 "battle" : "trainer",
-                "stage" : "aggro"
+                "stage" : "aggro",
+                "skippableAfter" : 15,
             },
             {
                 "song": "MUS_ABANDONED_SHIP",
@@ -1346,6 +1747,35 @@ const musicData = {
         "ch2" : "channel2MusicID",
         "bank" : "musicBank",
         "map" : "mapMusic",
+        "idlePlaylist" : ["music/crystal/02.mp3",
+            "music/crystal/03.mp3",
+            "music/crystal/14.mp3",
+            "music/crystal/15.mp3",
+            "music/crystal/18.mp3",
+            "music/crystal/21.mp3",
+            "music/crystal/22.mp3",
+            "music/crystal/28.mp3",
+            "music/crystal/29.mp3",
+            "music/crystal/35.mp3",
+            "music/crystal/37.mp3",
+            "music/crystal/38.mp3",
+            "music/crystal/43.mp3",
+            "music/crystal/44.mp3",
+            "music/crystal/45.mp3",
+            "music/crystal/52.mp3",
+            "music/crystal/53.mp3",
+            "music/crystal/60.mp3",
+            "music/crystal/61.mp3",
+            "music/crystal/62.mp3",
+            "music/crystal/69.mp3",
+            "music/crystal/71.mp3",
+            "music/crystal/77.mp3",
+            "music/crystal/80.mp3",
+            "music/crystal/81.mp3",
+            "music/crystal/87.mp3",
+            "music/crystal/96 Buena's Password Show.mp3",
+
+        ],
         "music": [
             {
                 "song": "silent",
@@ -1915,6 +2345,23 @@ const musicData = {
         "bank" : "audioBank",
         "map" : "overworldTrackCurrentMap",
         "overworldMap" : "overworldMap",
+        "idlePlaylist" : ["music/yellow/04 Pallet Town's Theme.mp3",
+                "music/yellow/07 Pewter City\'s Theme.mp3",
+                "music/yellow/08 Cerulean City\'s Theme.mp3",
+                "music/yellow/09 Celadon City\'s Theme.mp3",
+                "music/yellow/10 Cinnabar Island\'s Theme.mp3",
+                "music/yellow/11 Vermilion City\'s Theme.mp3",
+                 "music/yellow/34 Cycling.mp3",
+                 "music/yellow/12 Lavender Town\'s Theme.mp3",
+                "music/yellow/19 The Road to Viridian City ~ from Pallet.mp3",
+                "music/yellow/03 To Bill\'s Origin ~ From Cerulean.mp3",
+                "music/yellow/13 St. Anne.mp3",
+                "music/yellow/20 The Road to Cerulean ~ from Mt. Moon.mp3",
+                "music/yellow/21 The Road to Lavender Town ~ from Vermilion.mp3",
+                "music/yellow/32 Oak Research Lab.mp3",
+                "music/yellow/02 Opening (part 2).mp3",
+                "music/yellow/05 Pokemon Center.mp3",
+            ],
         "music" : [
             {
                 "song": "silent",
@@ -2267,6 +2714,23 @@ const musicData = {
         "ch2" : "channel2",
         "bank" : "audioBank",
         "map" : "overworldTrackCurrentMap",
+        "idlePlaylist" : ["music/yellow/04 Pallet Town's Theme.mp3",
+                "music/yellow/07 Pewter City\'s Theme.mp3",
+                "music/yellow/08 Cerulean City\'s Theme.mp3",
+                "music/yellow/09 Celadon City\'s Theme.mp3",
+                "music/yellow/10 Cinnabar Island\'s Theme.mp3",
+                "music/yellow/11 Vermilion City\'s Theme.mp3",
+                 "music/yellow/34 Cycling.mp3",
+                 "music/yellow/12 Lavender Town\'s Theme.mp3",
+                "music/yellow/19 The Road to Viridian City ~ from Pallet.mp3",
+                "music/yellow/03 To Bill\'s Origin ~ From Cerulean.mp3",
+                "music/yellow/13 St. Anne.mp3",
+                "music/yellow/20 The Road to Cerulean ~ from Mt. Moon.mp3",
+                "music/yellow/21 The Road to Lavender Town ~ from Vermilion.mp3",
+                "music/yellow/32 Oak Research Lab.mp3",
+                "music/yellow/02 Opening (part 2).mp3",
+                "music/yellow/05 Pokemon Center.mp3",
+            ],
         "music" : [
             {
                 "song": "silent",
