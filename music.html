@@ -72,7 +72,7 @@
             Current Song Play Time: {{ currentSongPlayTime.toFixed(2) }}
             <h1>Volume controls</h1>
             <div class="slidecontainer">
-                <p>Music: <button @click="toggleAudio"> Play/Pause </button></p>
+                <p>Music: <button @click="toggleAudio"> Play/Pause </button><button @click="playRandom"> Shuffle </button></p>
                 <input type="range" min="0" max="100" v-model="musicVolume" class="slider" title="Music Volume" @change="saveToLocalStorage('musicVolume')">
                 <p>Volume: {{ musicVolume }} </p>
                 <br>
@@ -197,8 +197,11 @@
         <script src="https://unpkg.com/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
         <script src="https://unpkg.com/vue@latest/dist/vue.global.js"></script>
         <script src="http://localhost:8085/dist/gameHookMapperClient.js"></script>
+        <!--<script src="packages/signalR.js"></script>
+        <script src="packages/vue.js"></script>
+        <script src="packages/gameHookMapperClient.js"></script>-->
         <script src="musicData.js"></script>
         <script src="soundData.js"></script>
-        <script src="customTrainers.js"></script>
+        <script src="customtrainers.js"></script>
         <script src="music.js"></script>
 </body>

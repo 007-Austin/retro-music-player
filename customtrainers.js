@@ -14,11 +14,11 @@ const customTrainers = {
             //     "opponent": "ELITE_FOUR_LORELEI",
             //     "file": "music/heartgold/78 - Battle! (Champion).flac"
             // },
-            {
-                /*format example*/
-                "opponent": "ELITE_FOUR_BRUNO",
-                "file": "music/firered/24. Guide.flac"
-            },
+            //{
+            //    /*format example*/
+            //    "opponent": "ELITE_FOUR_BRUNO",
+            //    "file": "music/firered/24. Guide.flac"
+            //},
             // {
             //     /*format example*/
             //     "opponent": "ELITE_FOUR_AGATHA",
@@ -148,13 +148,46 @@ const customTrainers = {
             //     "file": "music/heartgold/78 - Battle! (Champion).flac"
             // },
             {
+                "name": "AGATHA",
+                "file": "music/yellow/41 Pokemon Tower.mp3"
+            },
+            {
                 "name": "BRUNO",
                 "file": "music/yellow/16 Guide.mp3"
+            },
+            {
+                "name": "LORELEI",
+                "file": "music/yellow/23 Battle (VS Gym Leader).mp3"
+            },
+			
+            {
+                "name": "LANCE",
+                "file": "music/crystal/47.mp3"
+            },
+            {
+                "name": "KOGA",
+                "file": "music/crystal/46.mp3"
+            },
+            {
+                "name": "GIOVANNI",
+                "file": "music/crystal/49.mp3"
             },
             // {
             //     "name": "GIOVANNI",
             //     "file": "music/yellow/49 Unknown Song.mp3"
             // },
+			{
+                "name": "RIVAL1",
+                "file": "music/crystal/48.mp3"
+            },
+			{
+                "name": "RIVAL2",
+                "file": "music/crystal/48.mp3"
+            },
+			//{
+            //    "name": "RIVAL3",
+            //    "file": "music/crystal/48.mp3"
+            //},
         ],
         "types" : [
             //this is for a few specific battle types
