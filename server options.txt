@@ -1,0 +1,5 @@
+npx http-server
+
+
+(USE THIS ONE, IT WORKS)
+python -m http.server 8080
